@@ -1,19 +1,20 @@
 #include <stdio.h>
 
 /**
- * main - Entry point
+ * main - Prints the numbers since 0 to 9
  *
- * Return: 0
+ * Return: Always (Success)
  */
 int main(void)
 {
-	int i = 48;
+	int n;
 
-	while (i < 58)
+	for (n = '0'; n <= '9'; n++)
 	{
-		putchar(i);
-		i++;
+		putchar(n);
 	}
-	putchar('\n')
+
+	putchar('\n');
+
 	return (0);
 }
