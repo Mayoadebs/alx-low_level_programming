@@ -1,1 +1,1 @@
-readme for hello world c program
+ C troubles
