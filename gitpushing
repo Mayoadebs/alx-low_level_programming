@@ -1,6 +1,0 @@
-#!/bin/bash
-echo '___________executing script____________'
-git add .
-git commit -m 'Task Done'
-git push
-echo '___________Task Completed_____________'
