@@ -1,26 +1,36 @@
 #!/usr/bin/python3
+"""Contains function that returns the perimeter of the
+island described in grid
+"""
 
-""" Function to find perimiter of an island """
+
+def determine_soroundings(array, y, x):
+    """Determines whether soroundings has water or not
+    also if it's next or previous is at the ends
+    Args:
+        array (list): grid
+        y (int): current list index in `array`
+        x (int): current index in the list in `array`
+    """
+    mask = 1
+    top = array[y - 1][x] ^ mask if y > 0 else 1
+    bottom = array[y + 1][x] ^ mask if y < (len(array) - 1) else 1
+    left = array[y][x - 1] ^ mask if x > 0 else 1
+    right = array[y][x + 1] ^ mask if x < (len(array[y]) - 1) else 1
+    positions = top + bottom + right + left
+    return positions
 
 
 def island_perimeter(grid):
+    """Gets the perimeter determined by sorounding.
+    all sides that do not have water we increase perimeter.
+    Args:
+        grid (list): list of lists
     """
-    Input: List of Lists
-    Returns: Perimeter of the island
-    """
-    count = 0
-    row = len(grid)
-    col = len(grid[0]) if row else 0
-
+    land = 1
+    perimeter = 0
     for i in range(len(grid)):
-        for j in range(len(grid[i])):
-
-            idx = [(i - 1, j), (i, j - 1), (i, j + 1), (i + 1, j)]
-            check = [1 if k[0] in range(row) and k[1] in range(col) else 0
-                     for k in idx]
-
-            if grid[i][j]:
-                count += sum([1 if not r or not grid[k[0]][k[1]] else 0
-                              for r, k in zip(check, idx)])
-
-    return (count)
+        for j, x in enumerate(grid[i]):
+            if x == land:
+                perimeter += determine_soroundings(grid, i, j)
+    return perimeter
